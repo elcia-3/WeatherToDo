@@ -53,7 +53,7 @@ const EditForm = ({ defaultValues, id }) => {
 
   return (
     <>
-      <form onSubmit={onSubmit} className={utilStyles.form}>
+      <form onSubmit={onSubmit} >
         <div>
           <label>Task</label>
           <input
@@ -61,7 +61,7 @@ const EditForm = ({ defaultValues, id }) => {
             {...register('task', { required: 'Task is required' })}
           />
           {errors.task && (
-            <span role="alert" className={utilStyles.error}>
+            <span role="alert">
               {errors.task.message}
             </span>
           )}
@@ -71,19 +71,19 @@ const EditForm = ({ defaultValues, id }) => {
           <label>Completed</label>
           <input type="checkbox" {...register('completed')} />
           {errors.completed && (
-            <span role="alert" className={utilStyles.error}>
+            <span role="alert">
               {errors.completed.message}
             </span>
           )}
         </div>
 
-        <div className={utilStyles.submit}>
+        <div>
           <button type="submit">Update</button>
         </div>
       </form>
 
       {errorMessage && (
-        <p role="alert" className={utilStyles.errorMessage}>
+        <p role="alert">
           {errorMessage}
         </p>
       )}

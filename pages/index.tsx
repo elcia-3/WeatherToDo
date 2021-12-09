@@ -66,7 +66,14 @@ const deleteATodo = async (id) => {
   }
 };
 
-  if (error) return <div>failed to load</div>;
+  if (error) return (
+    <>
+
+    <div>failed to load</div>
+      <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
+    </>
+
+  );
 
   return (
     <Layout>
@@ -74,6 +81,7 @@ const deleteATodo = async (id) => {
       <Link href="/new">
         <a>Create New Todo</a>
       </Link>
+      <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
 
       {data ? (
         <ul>

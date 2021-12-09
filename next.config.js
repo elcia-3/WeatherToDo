@@ -8,7 +8,7 @@ module.exports = {
           {
             key: 'x-custom-header',
             value: 'my custom header value',
-            authorization: "Basic Zm5BRVpwdnV2aUFDUVM0c1ZkSlBxUmR1Q25FNklSbGhLYm5TQ2wxUjp0b2RvOmFkbWlu",
+            authorization: "Basic fnAEZ-jjlvACQk5gRQqhs5y6T6Z3T9EodG8RKBB0",
           },
         ],
       },

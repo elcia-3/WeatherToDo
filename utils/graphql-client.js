@@ -4,11 +4,13 @@ import { GraphQLClient } from 'graphql-request';
 
 const endpoint = 'https://graphql.fauna.com/graphql';
 
-console.log(process.env.NEXT_PUBLIC_FAUNA_SECRET);
+export const graphQLClient = (token) => {
+  const secret = token || process.env.NEXT_PUBLIC_FAUNA_GUEST_SECRET;
 
-export const graphQLClient = new GraphQLClient(endpoint, {
-  headers: {
-    authorization: `Bearer ${process.env.NEXT_PUBLIC_FAUNA_SECRET}`,
-    'X-Schema-Preview': 'partial-update-mutation',
-  },
-});
+  return new GraphQLClient(endpoint, {
+    headers: {
+      authorization: `Bearer ${secret}`,
+      // 'X-Schema-Preview': 'partial-update-mutation', // move to `pages/index.js`
+    },
+  });
+};

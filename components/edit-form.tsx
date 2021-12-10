@@ -39,7 +39,7 @@ const EditForm = ({ defaultValues, id }) => {
     };
 
     try {
-      await graphQLClient.request(query, variables);
+      await graphQLClient(token).request(query, variables);
       Router.push('/');
     } catch (error) {
       console.error(error);

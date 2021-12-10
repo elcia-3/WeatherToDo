@@ -7,9 +7,11 @@ import styles from '../styles/Home.module.css';
 import { graphQLClient } from '../utils/graphql-client';
 import Link from 'next/link';
 
-const fetcher = async (query) => await graphQLClient.request(query);
 
 const Home = () => {
+  const fetcher = async (query) => await graphQLClient(token).request(query);
+
+
   const { data, error ,mutate } = useSWR(
     gql`
       {
@@ -42,7 +44,7 @@ const toggleTodo = async (id, completed) => {
   };
 
   try {
-    await graphQLClient.request(query, variables);
+    await graphQLClient(token).setHeader('X-Schema-Preview', 'partial-update-mutation').request(mutation, variables);
     mutate();
   } catch (error) {
     console.error(error);
@@ -88,12 +90,6 @@ const deleteATodo = async (id) => {
           {data.allTodos.data.map((todo) => (
             <li key={todo._id} className={styles.todo}>
               <span>{todo._id}</span>
-              <span>{todo.task}</span>
-              <span>
-                <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
-                  <a>Edit</a>
-                </Link>
-              </span>
               <span
                 onClick={() => toggleTodo(todo._id, todo.completed)}
                 style={
@@ -104,7 +100,13 @@ const deleteATodo = async (id) => {
               >
                 {todo.task}
               </span>
-              <span onClick={() => deleteATodo(todo._id)} className={styles.delete}>
+ 
+              <span>
+                <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
+                  <a>Edit</a>
+                </Link>
+              </span>
+             <span onClick={() => deleteATodo(todo._id)} className={styles.delete}>
                 Delete
               </span>
             </li>

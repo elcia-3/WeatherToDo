@@ -1,6 +1,7 @@
 // components/layout.js
 
 import Head from 'next/head';
+import Header from '../components/header';
 
 const Layout = ({ children }) => (
   <>
@@ -10,6 +11,7 @@ const Layout = ({ children }) => (
     </Head>
 
     <main>
+      <Header />
       <div>{children}</div>
     </main>
   </>

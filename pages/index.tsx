@@ -6,9 +6,10 @@ import Layout from '../components/layout';
 import styles from '../styles/Home.module.css';
 import { graphQLClient } from '../utils/graphql-client';
 import Link from 'next/link';
+import { getAuthCookie } from '../utils/auth-cookies';
 
 
-const Home = () => {
+const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
 
 
@@ -38,6 +39,22 @@ const toggleTodo = async (id, completed) => {
     }
   `;
 
+    const mutation = gql`
+      mutation CreateATodo($task: String!, $owner: ID!) {
+        createTodo(
+          data: { task: $task, completed: false, owner: { connect: $owner } }
+        ) {
+          task
+          completed
+          owner {
+            _id
+          }
+        }
+      }
+    `;
+
+
+
   const variables = {
     id,
     completed: !completed,
@@ -61,7 +78,7 @@ const deleteATodo = async (id) => {
   `;
 
   try {
-    await graphQLClient.request(query, { id });
+    await graphQLClient(token).request(query, { id });
     mutate();
   } catch (error) {
     console.error(error);
@@ -70,11 +87,13 @@ const deleteATodo = async (id) => {
 
   if (error) return (
     <>
-
-    <div>failed to load</div>
-      <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
+      <Layout>
+        <div>failed to load</div>
+        <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
+        <p>{process.env.NEXT_PUBLIC_GUEST_SECRET}</p>
+        <p>{process.env.FAUNA_GEST_SECRET}</p>
+      </Layout>
     </>
-
   );
 
   return (
@@ -83,7 +102,10 @@ const deleteATodo = async (id) => {
       <Link href="/new">
         <a>Create New Todo</a>
       </Link>
+
       <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
+      <p>{process.env.NEXT_PUBLIC_GUEST_SECRET}</p>
+      <p>{process.env.FAUNA_GEST_SECRET}</p>
 
       {data ? (
         <ul>
@@ -118,5 +140,10 @@ const deleteATodo = async (id) => {
     </Layout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  const token = getAuthCookie(ctx.req);
+  return { props: { token: token || null } };
+}
 
 export default Home;

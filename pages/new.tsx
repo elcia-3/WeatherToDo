@@ -6,8 +6,11 @@ import { gql } from 'graphql-request';
 import { useForm } from 'react-hook-form';
 import Layout from '../components/layout';
 import { graphQLClient } from '../utils/graphql-client';
+import { getAuthCookie } from '../utils/auth-cookies';
+import useSWR from 'swr'; // add
 
-const New = () => {
+const New = ({token}) => {
+   const { data: user } = useSWR('/api/user'); // add 
   const [errorMessage, setErrorMessage] = useState('');
 
   const {
@@ -19,6 +22,26 @@ const New = () => {
   const onSubmit = handleSubmit(async ({ task }) => {
     if (errorMessage) setErrorMessage('');
 
+    // update
+    const mutation = gql`
+      mutation CreateATodo($task: String!, $owner: ID!) {
+        createTodo(
+          data: { task: $task, completed: false, owner: { connect: $owner } }
+        ) {
+          task
+          completed
+          owner {
+            _id
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      task,
+      owner: user && user.id,
+    };
+
     const query = gql`
       mutation CreateATodo($task: String!) {
         createTodo(data: { task: $task, completed: false }) {
@@ -28,8 +51,9 @@ const New = () => {
       }
     `;
 
+
     try {
-      await graphQLClient.request(query, { task });
+      await graphQLClient(token).request(mutation, variables); // update
       Router.push('/');
     } catch (error) {
       console.error(error);
@@ -69,5 +93,10 @@ const New = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  const token = getAuthCookie(ctx.req);
+  return { props: { token: token || null } };
+}
 
 export default New;

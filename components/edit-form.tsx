@@ -6,7 +6,7 @@ import { gql } from 'graphql-request';
 import { useForm } from 'react-hook-form';
 import { graphQLClient } from '../utils/graphql-client';
 
-const EditForm = ({ defaultValues, id }) => {
+const EditForm = ({ defaultValues, id, token }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const {

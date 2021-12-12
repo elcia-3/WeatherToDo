@@ -10,6 +10,7 @@ const Calendar = () => {
   }
 
   return (
+
     <DatePicker
       selected={startDate}
       onChange={handleChange}

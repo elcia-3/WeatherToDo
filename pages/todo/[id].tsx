@@ -6,7 +6,7 @@ import EditForm from '../../components/edit-form';
 import { graphQLClient } from '../../utils/graphql-client';
 import { getAuthCookie } from '../../utils/auth-cookies';
 
-const Todo = (token) => {
+const Todo = ({token}) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -25,12 +25,17 @@ const Todo = (token) => {
 
 
 
-  if (error) return <div>failed to load</div>;
+  if (error) return (
+    <>
+      <Layout>
+        <div>failed to load</div>
+      </Layout>
+    </>
+  )
 
   return (
     <Layout>
       <h1>Edit Todo</h1>
-
       {data ? (
         <EditForm defaultValues={data.findTodoByID} id={id} token={token} />
       ) : (

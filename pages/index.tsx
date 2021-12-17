@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { getAuthCookie } from '../utils/auth-cookies';
 
 
+import Sidebar from '../components/sidebar'
+
 const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
 
@@ -21,6 +23,7 @@ const Home = ({token}) => {
             _id
             task
             completed
+            time
           }
         }
       }
@@ -42,10 +45,11 @@ const toggleTodo = async (id, completed) => {
     const mutation = gql`
       mutation CreateATodo($task: String!, $owner: ID!) {
         createTodo(
-          data: { task: $task, completed: false, owner: { connect: $owner } }
+          data: { task: $task, completed: false, time: $time, owner: { connect: $owner } }
         ) {
           task
           completed
+          time
           owner {
             _id
           }
@@ -97,47 +101,57 @@ const deleteATodo = async (id) => {
   );
 
   return (
+    <>
     <Layout>
-      <h1>Next Fauna GraphQL CRUD</h1>
-      <Link href="/new">
-        <a>Create New Todo</a>
-      </Link>
-
-      <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
-      <p>{process.env.NEXT_PUBLIC_GUEST_SECRET}</p>
-      <p>{process.env.FAUNA_GEST_SECRET}</p>
-
-      {data ? (
-        <ul>
-          {data.allTodos.data.map((todo) => (
-            <li key={todo._id} className={styles.todo}>
-              <span>{todo._id}</span>
-              <span
-                onClick={() => toggleTodo(todo._id, todo.completed)}
-                style={
-                  todo.completed
-                    ? { textDecorationLine: 'line-through' }
-                    : { textDecorationLine: 'none' }
-                }
-              >
-                {todo.task}
-              </span>
- 
-              <span>
-                <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
-                  <a>Edit</a>
-                </Link>
-              </span>
-             <span onClick={() => deleteATodo(todo._id)} className={styles.delete}>
-                Delete
-              </span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>loading...</div>
-      )}
     </Layout>
+      <div className={styles.WholePage}>
+        <div className={styles.SidebarBox}>
+            <Sidebar>
+              <Link href="/">
+                <a className={styles.current}>Inbox</a>
+              </Link>
+              <Link href="/new">
+                <a>Create New Todo</a>
+              </Link>
+            </Sidebar>
+        </div>
+        <div className={styles.MainBox}>
+
+        <h1>Inbox</h1>
+
+        {data ? (
+          <ul>
+            {data.allTodos.data.map((todo) => (
+              <li key={todo._id} className={styles.todo}>
+                <span
+                  onClick={() => toggleTodo(todo._id, todo.completed)}
+                  style={
+                    todo.completed
+                      ? { textDecorationLine: 'line-through' }
+                      : { textDecorationLine: 'none' }
+                  }
+                >
+                  <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
+                    {todo.task}
+                  </Link>
+                </span>
+  
+                <span>
+                  {todo.time}
+                </span>
+                <span onClick={() => deleteATodo(todo._id)} className={styles.delete}>
+                  Delete
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>loading...</div>
+        )}
+
+        </div>
+      </div>
+    </>
   );
 };
 

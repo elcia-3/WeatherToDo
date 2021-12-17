@@ -19,17 +19,18 @@ const New = ({token}) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = handleSubmit(async ({ task }) => {
+  const onSubmit = handleSubmit(async ({ task, time }) => {
     if (errorMessage) setErrorMessage('');
 
     // update
     const mutation = gql`
-      mutation CreateATodo($task: String!, $owner: ID!) {
+      mutation CreateATodo($task: String!, $time: String, $owner: ID!) {
         createTodo(
-          data: { task: $task, completed: false, owner: { connect: $owner } }
+          data: { task: $task, completed: false, time: $time, owner: { connect: $owner } }
         ) {
           task
           completed
+          time
           owner {
             _id
           }
@@ -39,6 +40,7 @@ const New = ({token}) => {
 
     const variables = {
       task,
+      time,
       owner: user && user.id,
     };
 
@@ -72,6 +74,20 @@ const New = ({token}) => {
             type="text"
             placeholder="e.g. do something"
             {...register('task', { required: 'Task is required' })}
+          />
+          {errors.task && (
+            <span role="alert">
+              {errors.task.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label>Time</label>
+          <input
+            type="time"
+            placeholder="input time"
+            {...register('time')}
           />
           {errors.task && (
             <span role="alert">

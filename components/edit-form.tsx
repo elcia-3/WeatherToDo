@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { gql } from 'graphql-request';
 import { useForm } from 'react-hook-form';
 import { graphQLClient } from '../utils/graphql-client';
+import { getAuthCookie } from '../utils/auth-cookies';
 
 const EditForm = ({ defaultValues, id, token }) => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -90,5 +91,6 @@ const EditForm = ({ defaultValues, id, token }) => {
     </>
   );
 };
+
 
 export default EditForm;

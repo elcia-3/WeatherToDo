@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import styles from '../styles/header.module.css';
 import useSWR from 'swr';
 
 const Header = () => {
@@ -20,43 +21,41 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <header>
-        <nav>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
+    <header>
+      <div className={styles.header}>
+        <Link href="/">
+          <a className={styles.home}>Home</a>
+        </Link>
 
-          <ul>
-            {user ? (
-              <>
-                <li>
-                  <Link href="/profile">
-                    <a>{user.email}</a>
-                  </Link>
-                </li>
-                <li>
-                  <button onClick={logout}>Logout</button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link href="/login">
-                    <a>Login</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/signup">
-                    <a>Signup</a>
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-      </header>
-    </div>
+        <ul>
+          {user ? (
+            <>
+              <li>
+                <Link href="/profile">
+                  <a>{user.email}</a>
+                </Link>
+              </li>
+              <li>
+                <button onClick={logout}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup">
+                  <a>Signup</a>
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+    </header>
   );
 };
 

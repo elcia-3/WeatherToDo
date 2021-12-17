@@ -13,7 +13,7 @@ const App = ({ name, weatherMain, temp }: Props) => {
     <>
     <div>{name}</div>
     <div>{weatherMain}</div>
-    <div>{temp}</div>
+    <div>{temp}℃</div>
     </>
   )
 };

@@ -11,13 +11,12 @@ type Props = {
 const App = ({ name, weatherMain, temp }: Props) => {
   return (
     <>
-    <div>{name}</div>
-    <div>{weatherMain}</div>
-    <div>{temp}</div>
+      <div>{name}</div>
+      <div>{weatherMain}</div>
+      <div>{temp}℃</div>
     </>
   )
 };
- 
 
 var city = 'Shizuoka';
 const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=b444cb1382145c9a52fed5d6a9180ce6";

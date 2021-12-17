@@ -2,7 +2,7 @@ type Todo {
   task: String!
   completed: Boolean!
   owner: User!
-  date: String
+  date: Date
   time: String 
 }
 

@@ -91,12 +91,30 @@ const deleteATodo = async (id) => {
 
   if (error) return (
     <>
-      <Layout>
-        <div>failed to load</div>
-        <p>{process.env.NEXT_PUBLIC_FAUNA_SECRET}</p>
-        <p>{process.env.NEXT_PUBLIC_GUEST_SECRET}</p>
-        <p>{process.env.FAUNA_GEST_SECRET}</p>
-      </Layout>
+    <Layout>
+    </Layout>
+      <div className={styles.WholePage}>
+        <div className={styles.SidebarBox}>
+            <Sidebar>
+              <Link href="/">
+                <a className={styles.current}>Inbox</a>
+              </Link>
+              <Link href="/new">
+                <a>Create New Todo</a>
+              </Link>
+            </Sidebar>
+        </div>
+        <div className={styles.MainBox}>
+          <p>plese Login</p>
+          <Link href="/signup">
+            <a className={styles.btnflat}>Signup</a>
+          </Link>
+ 
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+        </div>
+      </div>
     </>
   );
 

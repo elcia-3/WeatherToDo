@@ -3,7 +3,7 @@ import styles from '../styles/sidebar.module.css';
 import { useState, useEffect} from 'react';
 
 
-export const getWindowSize = () => {
+export const UseWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,
@@ -31,7 +31,7 @@ export const getWindowSize = () => {
 
 
 export const Sidebar = ({children }) => {
-  var { width, height } = getWindowSize();
+  var { width, height } = UseWindowSize();
   width = 200;
   height  -= 40;
 

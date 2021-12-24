@@ -1,0 +1,36 @@
+.WholePage{
+    display: flex;
+    background-color: #1f1f1f;
+    color: #e2e2e2;
+}
+
+.SidebarBox{
+    background-color: #323332;
+}
+
+.SidebarBox a{
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #e2e2e2;
+}
+
+.current{
+  background-color: #555555;
+}
+
+.MainBox{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.MainBox H1{
+  font-size: 24px;
+}
+
+.MainContentBox{
+  width: 70%;
+}

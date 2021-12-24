@@ -33,7 +33,7 @@ export const UseWindowSize = () => {
 export const Sidebar = ({children }) => {
   var { width, height } = UseWindowSize();
   width = 200;
-  height  -= 40;
+  height  -= 41;
 
   const [xPosition, setX] = React.useState(-width);
 

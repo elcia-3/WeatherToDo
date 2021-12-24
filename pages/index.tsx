@@ -7,9 +7,9 @@ import styles from '../styles/Home.module.css';
 import { graphQLClient } from '../utils/graphql-client';
 import Link from 'next/link';
 import { getAuthCookie } from '../utils/auth-cookies';
+import Image from 'next/image';
 
 
-import Sidebar from '../components/sidebar'
 
 const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
@@ -92,55 +92,40 @@ const deleteATodo = async (id) => {
   if (error) return (
     <>
     <Layout>
-    </Layout>
-      <div className={styles.WholePage}>
-        <div className={styles.SidebarBox}>
-            <Sidebar>
-              <Link href="/">
-                <a className={styles.current}>Inbox</a>
-              </Link>
-              <Link href="/new">
-                <a>Create New Todo</a>
-              </Link>
-            </Sidebar>
-        </div>
-        <div className={styles.MainBox}>
-          <p>plese Login</p>
-          <Link href="/signup">
-            <a className={styles.btnflat}>Signup</a>
-          </Link>
- 
-          <Link href="/login">
+      <div className={styles.unlogin}>
+        <p>Welcome to Weather ToDo</p>
+        <Link href="/signup">
+          <div className={styles.button}>
+            <a>Signup</a>
+          </div>
+        </Link>
+
+        <Link href="/login">
+          <div className={styles.button}>
             <a>Login</a>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
+    </Layout>
     </>
   );
 
   return (
     <>
     <Layout>
-    </Layout>
-      <div className={styles.WholePage}>
-        <div className={styles.SidebarBox}>
-            <Sidebar>
-              <Link href="/">
-                <a className={styles.current}>Inbox</a>
-              </Link>
-              <Link href="/new">
-                <a>Create New Todo</a>
-              </Link>
-            </Sidebar>
-        </div>
-        <div className={styles.MainBox}>
-
-        <h1>Inbox</h1>
-
         {data ? (
           <ul>
             {data.allTodos.data.map((todo) => (
               <li key={todo._id} className={styles.todo}>
+                <span  onClick={() => deleteATodo(todo._id)} className={styles.delete}>
+                <Image
+                  src="/../public/circle.svg"
+                  alt="svg"
+                  width={30}
+                  height={30}
+                />
+ 
+                </span>
                 <span
                   onClick={() => toggleTodo(todo._id, todo.completed)}
                   style={
@@ -157,19 +142,14 @@ const deleteATodo = async (id) => {
                 <span>
                   {todo.time}
                 </span>
-                <span onClick={() => deleteATodo(todo._id)} className={styles.delete}>
-                  Delete
-                </span>
               </li>
             ))}
           </ul>
         ) : (
           <div>loading...</div>
         )}
-
-        </div>
-      </div>
-    </>
+    </Layout>
+   </>
   );
 };
 

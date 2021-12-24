@@ -1,32 +1,41 @@
-.WholePage{
-    display: flex;
-    background-color: #1f1f1f;
-    color: #e2e2e2;
+.MainContentBox{
+  width: 70%;
 }
 
-.SidebarBox{
-    background-color: #323332;
+.delete {
+  cursor:pointer;
 }
 
-.SidebarBox a{
-  padding-left: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: #e2e2e2;
-}
-
-.current{
-  background-color: #555555;
-}
-
-.MainBox{
+.button a {
   display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+  padding: 1em 2em;
+  width: 200px;
+  color: #e2e2e2;
+  font-size: 18px;
+  font-weight: 700;
+  border: 3px solid #e2e2e2;
+  border-radius: 10px;
 }
 
-.MainBox H1{
-  font-size: 24px;
+.button a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #e2e2e2;
+  border-right: 3px solid #e2e2e2;
+  transform: rotate(45deg);
 }
 
+.button a:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: #e2e2e2;
+}
+
+.button a:hover::after {
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+}

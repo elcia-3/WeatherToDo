@@ -2,6 +2,9 @@
 
 import Head from 'next/head';
 import Header from '../components/header';
+import styles from '../styles/layout.module.css';
+import Sidebar from '../components/sidebar'
+import Link from 'next/link';
 
 const Layout = ({ children }) => (
   <>
@@ -12,7 +15,25 @@ const Layout = ({ children }) => (
 
     <main>
       <Header />
-      <div>{children}</div>
+      <div className={styles.WholePage}>
+        <div className={styles.SidebarBox}>
+          <Sidebar>
+            <Link href="/">
+              <a className={styles.current}>Inbox</a>
+            </Link>
+            <Link href="/new">
+              <a>Create New Todo</a>
+            </Link>
+          </Sidebar>
+        </div>
+        <div className={styles.MainBox}>
+          <div className={styles.MainContentBox}>
+            {children}
+          </div>
+        </div>
+      </div>
+ 
+
     </main>
   </>
 );

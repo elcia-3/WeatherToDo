@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
  
 class SamplePage extends Component {
-  constructor(props) {
+/*  constructor(props) {
     super(props);
     this.state = {
       day: new Date(),
@@ -20,9 +20,10 @@ class SamplePage extends Component {
           locale="ja"
           selected={this.state.day}
           onChange={(date) => this.setState({day: date})}
-          />
+          customInput={<button>{this.getFormatDate(this.state.day)}</button>} />
       </div>
     );
   }
+  */
 }
 export default SamplePage;

@@ -273,9 +273,6 @@ button:disabled,
  * Improve outlines for Firefox and unify style with input elements & buttons.
  */
 
-:-moz-focusring {
-  outline: auto;
-}
 
 select:disabled {
   opacity: inherit;
@@ -385,9 +382,6 @@ summary {
  * Remove outline for editable content.
  */
 
-[contenteditable]:focus {
-  outline: auto;
-}
 
 /* Tables */
 /* ============================================ */
@@ -416,3 +410,11 @@ th {
   font-weight: bold;
 }
 
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}

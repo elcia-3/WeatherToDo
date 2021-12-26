@@ -93,7 +93,6 @@ const deleteATodo = async (id) => {
     <>
     <Layout>
       <div className={styles.unlogin}>
-        <p>Welcome to Weather ToDo</p>
         <Link href="/signup">
           <div className={styles.button}>
             <a>Signup</a>

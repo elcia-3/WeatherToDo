@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Layout from '../components/layout/signuplayout';
+import styles from '../styles/signup.module.css';
 
 const Signup = () => {
   const router = useRouter();
@@ -42,14 +43,11 @@ const Signup = () => {
 
   return (
     <Layout>
-      <h1>Sign Up</h1>
-
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Email</label>
+      <form onSubmit={onSubmit} className={styles.formlayout}>
+        <div className={styles.input}>
           <input
             type="email"
-            placeholder="e.g. john@example.com"
+            placeholder="Email"
             {...register('email', { required: 'Email is required' })}
           />
           {errors.email && (
@@ -59,11 +57,10 @@ const Signup = () => {
           )}
         </div>
 
-        <div>
-          <label>Password</label>
+        <div className={styles.input}>
           <input
             type="password"
-            placeholder="e.g. John-1234"
+            placeholder="Password"
             {...register('password', { required: 'Password is required' })}
           />
           {errors.password && (
@@ -73,11 +70,10 @@ const Signup = () => {
           )}
         </div>
 
-        <div>
-          <label>Confirm Password</label>
+        <div className={styles.input}>
           <input
             type="password"
-            placeholder="e.g. John-1234"
+            placeholder="Confirm Password"
             {...register('password2', {
               validate: (value) =>
                 value === watch('password') || 'Passwords do not match',
@@ -91,7 +87,7 @@ const Signup = () => {
         </div>
 
         <div>
-          <button type="submit">Sign up</button>
+          <button type="submit" className={styles.button}><span>Sign up</span></button>
         </div>
       </form>
 

@@ -4,32 +4,17 @@
     background: #191919;
 }
 
-.task{
-    border:1px solid #e2e2e2 ;
-}
-
-.task textarea{
-    width: 100%;
-    color: #e2e2e2;
-    resize: none;
-    height: 120px;
-}
-
-.task textarea::placeholder {
-  color: #8b8b8b;
-}
-
-.time{
+.input{
     margin: 8px 0;
     border-bottom:1px solid #e2e2e2 ;
 }
 
-.time input{
+.input input{
     width: 100%;
     color: #e2e2e2;
 }
 
-.time input::placeholder {
+.input input::placeholder {
   color: #8b8b8b;
 }
 

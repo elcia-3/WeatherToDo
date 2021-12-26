@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import Layout from '../components/layout';
+import styles from '../styles/login.module.css'
+import Layout from '../components/layout/loginlayout';
+import Image from 'next/image';
 
 const Login = () => {
   const router = useRouter();
@@ -41,13 +43,19 @@ const Login = () => {
 
   return (
     <Layout>
-      <h1>Log In</h1>
-
-      <form onSubmit={onSubmit}>
+      <form className={styles.box} onSubmit={onSubmit}>
         <div>
-          <label>Email</label>
+          <Image
+            src="/../public/WeatherToDo.svg"
+            alt="svg"
+            width={400}
+            height={100}
+          />
+
           <input
             type="email"
+            placeholder='Email'
+            className={styles.text}
             {...register('email', { required: 'Email is required' })}
           />
           {errors.email && (
@@ -58,9 +66,10 @@ const Login = () => {
         </div>
 
         <div>
-          <label>Password</label>
           <input
             type="password"
+            className={styles.password}
+            placeholder='Password'
             {...register('password', { required: 'Password is required' })}
           />
           {errors.password && (
@@ -71,7 +80,7 @@ const Login = () => {
         </div>
 
         <div>
-          <button type="submit">Log in</button>
+          <button className={styles.submit} type="submit">Log in</button>
         </div>
       </form>
 

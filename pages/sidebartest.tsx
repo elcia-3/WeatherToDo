@@ -1,12 +1,9 @@
 import Sidebar from '../components/sidebar'
 import styles from '../styles/sidebartest.module.css'
-import Layout from '../components/layout';
 
 const New = () => {
     return (
         <>
-          <Layout>
-          </Layout>            
             <div className={styles.WholePage}>
                 <div className={styles.SidebarBox}>
                     <Sidebar>

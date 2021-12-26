@@ -2,7 +2,7 @@
 
 import useSWR from 'swr';
 import { gql } from 'graphql-request';
-import Layout from '../components/layout';
+import Layout from '../components/layout/homelayout';
 import styles from '../styles/Home.module.css';
 import { graphQLClient } from '../utils/graphql-client';
 import Link from 'next/link';

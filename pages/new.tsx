@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Router from 'next/router';
 import { gql } from 'graphql-request';
 import { useForm } from 'react-hook-form';
-import Layout from '../components/layout';
+import Layout from '../components/layout/newlayout';
 import { graphQLClient } from '../utils/graphql-client';
 import { getAuthCookie } from '../utils/auth-cookies';
 import useSWR from 'swr'; // add

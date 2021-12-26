@@ -36,7 +36,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <button onClick={logout}>Logout</button>
+                <button className={styles.logout} onClick={logout}>Logout</button>
               </li>
             </>
           ) : (

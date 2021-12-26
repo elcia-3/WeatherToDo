@@ -1,15 +1,15 @@
 // components/layout.js
 
 import Head from 'next/head';
-import Header from '../components/header';
-import styles from '../styles/layout.module.css';
-import Sidebar from '../components/sidebar'
+import Header from '../../components/header';
+import styles from '../../styles/layout.module.css';
+import Sidebar from '../../components/sidebar'
 import Link from 'next/link';
 
 const Layout = ({ children }) => (
   <>
     <Head>
-      <title>Next Fauna GraphQL CRUD</title>
+      <title>WeatherToDo</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
@@ -19,10 +19,10 @@ const Layout = ({ children }) => (
         <div className={styles.SidebarBox}>
           <Sidebar>
             <Link href="/">
-              <a className={styles.current}>Inbox</a>
+              <a>Inbox</a>
             </Link>
             <Link href="/new">
-              <a>Create New Todo</a>
+              <a className={styles.current}>Create Todo</a>
             </Link>
           </Sidebar>
         </div>

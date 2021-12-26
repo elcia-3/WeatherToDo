@@ -81,7 +81,7 @@ const New = ({token}) => {
 
         <div className={styles.time}>
           <input
-            type="text"
+            type="time"
             placeholder="Time"
             {...register('time')}
           />

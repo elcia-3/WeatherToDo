@@ -114,37 +114,40 @@ const deleteATodo = async (id) => {
     <>
     <Layout>
         {data ? (
-          <ul>
+          <div className={styles.todos}>
             {data.allTodos.data.map((todo) => (
-              <li key={todo._id} className={styles.todo}>
-                <span  onClick={() => deleteATodo(todo._id)} className={styles.delete}>
+              <div key={todo._id} className={styles.todo}
+                 style={
+                    todo.completed
+                      ? { display: 'none' }
+                      : { display: 'flex' }
+                  }
+              >
+
+                <div onClick={() => deleteATodo(todo._id)} className={styles.svg}>
                 <Image
                   src="/circle.svg"
                   alt="svg"
-                  width={30}
-                  height={30}
+                  width={25}
+                  height={25}
                 />
- 
-                </span>
-                <span
-                  onClick={() => toggleTodo(todo._id, todo.completed)}
-                  style={
-                    todo.completed
-                      ? { textDecorationLine: 'line-through' }
-                      : { textDecorationLine: 'none' }
-                  }
-                >
-                  <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
-                    {todo.task}
-                  </Link>
-                </span>
-  
-                <span>
-                  {todo.time}
-                </span>
-              </li>
+                </div>
+
+                <div className={styles.text}> 
+
+                  <div onClick={() => toggleTodo(todo._id, todo.completed)} className={styles.task}>
+                    <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
+                      {todo.task}
+                    </Link>
+                  </div>
+                  <div className={styles.time}>
+                    {todo.time}
+                  </div>
+
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <div>loading...</div>
         )}

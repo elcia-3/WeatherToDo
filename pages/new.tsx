@@ -8,6 +8,7 @@ import Layout from '../components/layout/newlayout';
 import { graphQLClient } from '../utils/graphql-client';
 import { getAuthCookie } from '../utils/auth-cookies';
 import useSWR from 'swr'; // add
+import styles from '../styles/new.module.css';
 
 const New = ({token}) => {
    const { data: user } = useSWR('/api/user'); // add 
@@ -65,14 +66,10 @@ const New = ({token}) => {
 
   return (
     <Layout>
-      <h1>Create New Todo</h1>
-
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Task</label>
-          <input
-            type="text"
-            placeholder="e.g. do something"
+      <form onSubmit={onSubmit} className={styles.formlayout}>
+        <div className={styles.task}>
+          <textarea
+            placeholder="Task"
             {...register('task', { required: 'Task is required' })}
           />
           {errors.task && (
@@ -82,22 +79,16 @@ const New = ({token}) => {
           )}
         </div>
 
-        <div>
-          <label>Time</label>
+        <div className={styles.time}>
           <input
-            type="time"
-            placeholder="input time"
+            type="text"
+            placeholder="Time"
             {...register('time')}
           />
-          {errors.task && (
-            <span role="alert">
-              {errors.task.message}
-            </span>
-          )}
         </div>
 
         <div>
-          <button type="submit">Create</button>
+          <button type="submit" className={styles.button}><span>Create</span></button>
         </div>
       </form>
 

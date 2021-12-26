@@ -2,8 +2,24 @@
   width: 70%;
 }
 
-.delete {
+.todos{
+  margin: 8px 0;
+  border-bottom:1px solid #4b4b4b;
+}
+
+.todo{
+  padding: 8px 0;
+  border-top:1px solid #4b4b4b;
+
+}
+
+.svg {
+  margin-right: 10px;
   cursor:pointer;
+}
+
+.time{
+  font-size: 12px;
 }
 
 .button a {

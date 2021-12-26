@@ -119,7 +119,7 @@ const deleteATodo = async (id) => {
               <li key={todo._id} className={styles.todo}>
                 <span  onClick={() => deleteATodo(todo._id)} className={styles.delete}>
                 <Image
-                  src="/../public/circle.svg"
+                  src="/circle.svg"
                   alt="svg"
                   width={30}
                   height={30}

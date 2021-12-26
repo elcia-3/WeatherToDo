@@ -46,7 +46,7 @@ const Login = () => {
       <form className={styles.box} onSubmit={onSubmit}>
         <div>
           <Image
-            src="/../public/WeatherToDo.svg"
+            src="/WeatherToDo.svg"
             alt="svg"
             width={400}
             height={100}

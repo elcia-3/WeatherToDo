@@ -1,5 +1,6 @@
 // pages/index.js
 
+import React from "react";
 import useSWR from 'swr';
 import { gql } from 'graphql-request';
 import Layout from '../components/layout/homelayout';
@@ -8,12 +9,23 @@ import { graphQLClient } from '../utils/graphql-client';
 import Link from 'next/link';
 import { getAuthCookie } from '../utils/auth-cookies';
 import Image from 'next/image';
-
+import { useState, useEffect, useMemo } from 'react';
 
 
 const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
 
+  const [time1, settime1] = useState("12:00");
+  const [time2, settime2] = useState(null);
+  var t1;
+
+
+  const calcResult = useMemo(() => test(time1), [time1]);
+
+  function test(time1) {
+    t1 == time1
+    return t1
+  }
 
   const { data, error ,mutate } = useSWR(
     gql`
@@ -32,64 +44,10 @@ const Home = ({token}) => {
   );
 
 // add
-const toggleTodo = async (id, completed) => {
-  const query = gql`
-    mutation PartialUpdateTodo($id: ID!, $completed: Boolean!) {
-      partialUpdateTodo(id: $id, data: { completed: $completed }) {
-        _id
-        completed
-      }
-    }
-  `;
-
-    const mutation = gql`
-      mutation CreateATodo($task: String!, $owner: ID!) {
-        createTodo(
-          data: { task: $task, completed: false, time: $time, owner: { connect: $owner } }
-        ) {
-          task
-          completed
-          time
-          owner {
-            _id
-          }
-        }
-      }
-    `;
-
-  const variables = {
-    id,
-    completed: !completed,
-  };
-
-  try {
-    await graphQLClient(token).setHeader('X-Schema-Preview', 'partial-update-mutation').request(mutation, variables);
-    mutate();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const deleteATodo = async (id) => {
-  const query = gql`
-    mutation DeleteATodo($id: ID!) {
-      deleteTodo(id: $id) {
-        _id
-      }
-    }
-  `;
-
-  try {
-    await graphQLClient(token).request(query, { id });
-    mutate();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
   if (error) return (
     <>
     <Layout>
+
       <div className={styles.unlogin}>
         <Link href="/signup">
           <div className={styles.button}>
@@ -121,18 +79,23 @@ const deleteATodo = async (id) => {
                   }
               >
 
-                <div onClick={() => deleteATodo(todo._id)} className={styles.svg}>
+                <button onClick={() => settime1(todo.time) }>click</button>
+          
+                {() => settime1("13:00") }
+                
+                <div>time1 is {time1}</div>
+                <div>calcResult is {calcResult}</div>
+
                 <Image
                   src="/circle.svg"
                   alt="svg"
                   width={25}
                   height={25}
                 />
-                </div>
 
                 <div className={styles.text}> 
 
-                  <div onClick={() => toggleTodo(todo._id, todo.completed)} className={styles.task}>
+                  <div className={styles.task}>
                     <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
                       {todo.task}
                     </Link>
@@ -159,3 +122,7 @@ export async function getServerSideProps(ctx) {
 }
 
 export default Home;
+
+function incrementtime() {
+  throw new Error('Function not implemented.');
+}

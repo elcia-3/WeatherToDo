@@ -10,8 +10,7 @@ import { getAuthCookie } from '../utils/auth-cookies';
 import useSWR from 'swr'; // add
 import styles from '../styles/new.module.css';
 
-const New = ({token}) => {
-
+function New({token}) {
   const { data: user } = useSWR('/api/user'); // add 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -80,11 +79,18 @@ const New = ({token}) => {
           )}
         </div>
 
+        <div className={styles.time}>
+          <input
+            type="date"
+            {...register('time')}
+          />
+        </div>
+
+
 
         <div className={styles.time}>
           <input
             type="time"
-            placeholder="Time"
             {...register('time')}
           />
         </div>

@@ -1,4 +1,9 @@
-type User {
-    id: Int!
-    name: String!
+type Posts {
+  title: String!
+  content: String!
+  time: String!
+}
+
+type Query {
+  allPostsSortedByTime: [Posts!]! @resolver(name: "sort_by_time", paginated: true)
 }

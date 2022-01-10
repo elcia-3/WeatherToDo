@@ -14,4 +14,5 @@ type User {
 
 type Query {
   allTodos: [Todo!]
+  allTodosSortedByTime: [Todo!]! @resolver(name: "sort_by_time", paginated: true)
 }

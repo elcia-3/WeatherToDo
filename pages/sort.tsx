@@ -15,7 +15,7 @@ import { useState, useEffect, useMemo } from 'react';
 const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
 
-  const [time1, settime1] = useState("12:00");
+  const [time1, settime1] = useState(null);
   const [time2, settime2] = useState(null);
   var t1;
 
@@ -67,10 +67,13 @@ const Home = ({token}) => {
 
   return (
     <>
+
     <Layout>
         {data ? (
           <div className={styles.todos}>
             {data.allTodosSortedByTime.data.map((todo) => (
+
+
               <div key={todo._id} className={styles.todo}
                  style={
                     todo.completed
@@ -79,9 +82,12 @@ const Home = ({token}) => {
                   }
               >
 
+
                 <button onClick={() => settime1(todo.time) }>click</button>
           
                 {() => settime1("13:00") }
+
+                <div onChange={() => settime1(todo.time)}>time1 is {time1}</div>
                 
                 <div>time1 is {time1}</div>
                 <div>calcResult is {calcResult}</div>

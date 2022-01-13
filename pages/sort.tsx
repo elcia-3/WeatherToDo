@@ -15,17 +15,6 @@ import { useState, useEffect, useMemo } from 'react';
 const Home = ({token}) => {
   const fetcher = async (query) => await graphQLClient(token).request(query);
 
-  const [time1, settime1] = useState(null);
-  const [time2, settime2] = useState(null);
-  var t1;
-
-
-  const calcResult = useMemo(() => test(time1), [time1]);
-
-  function test(time1) {
-    t1 == time1
-    return t1
-  }
 
   const { data, error ,mutate } = useSWR(
     gql`
@@ -42,6 +31,65 @@ const Home = ({token}) => {
     `,
     fetcher
   );
+
+  function  datemanagemant(){
+
+    var timecheck: boolean[] = new Array(data?.allTodosSortedByTime.data.length);
+    var i: number = 0;
+    while(i <= data?.allTodosSortedByTime.data.length - 1 ){
+     if(data?.allTodosSortedByTime.data[i-1]?.time == data?.allTodosSortedByTime.data[i]?.time ){
+        timecheck[i] =  false;
+      }else{
+        timecheck[i] =  true;
+      }
+      ++i;
+      if(i == data?.allTodosSortedByTime.data.length - 1){
+        break;
+      }
+    }
+
+    function timebar(index){
+      if(index == 0 ) return(
+          <div className={styles.margin}>time is  {data?.allTodosSortedByTime.data[0].time}</div>
+      )
+
+      if(timecheck[index]) return(
+          <div>time is {data?.allTodosSortedByTime.data[index].time}</div>
+      )
+
+      return(
+        null
+      )
+    }
+
+
+    return(
+      <>
+          <div className={styles.todos}>
+            {data?.allTodosSortedByTime.data.map((todo, index) => (
+              <>
+              {timebar(index)}
+              <div>index is {index}</div>
+              <div key={todo._id} className={styles.todo}>
+
+                  
+                  <div className={styles.task}>
+                    <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
+                      {todo.task}
+                    </Link>
+                  </div>
+                  <div className={styles.time}>
+                    {todo.time}
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+      </>
+    )
+  }
+
+
 
 // add
   if (error) return (
@@ -69,54 +117,7 @@ const Home = ({token}) => {
     <>
 
     <Layout>
-        {data ? (
-          <div className={styles.todos}>
-            {data.allTodosSortedByTime.data.map((todo) => (
-
-
-              <div key={todo._id} className={styles.todo}
-                 style={
-                    todo.completed
-                      ? { display: 'none' }
-                      : { display: 'flex' }
-                  }
-              >
-
-
-                <button onClick={() => settime1(todo.time) }>click</button>
-          
-                {() => settime1("13:00") }
-
-                <div onChange={() => settime1(todo.time)}>time1 is {time1}</div>
-                
-                <div>time1 is {time1}</div>
-                <div>calcResult is {calcResult}</div>
-
-                <Image
-                  src="/circle.svg"
-                  alt="svg"
-                  width={25}
-                  height={25}
-                />
-
-                <div className={styles.text}> 
-
-                  <div className={styles.task}>
-                    <Link href="/todo/[id]" as={`/todo/${todo._id}`}>
-                      {todo.task}
-                    </Link>
-                  </div>
-                  <div className={styles.time}>
-                    {todo.time}
-                  </div>
-
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>loading...</div>
-        )}
+    {datemanagemant()}
     </Layout>
    </>
   );

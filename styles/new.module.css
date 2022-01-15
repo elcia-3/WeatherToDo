@@ -19,6 +19,19 @@
   color: #8b8b8b;
 }
 
+.date{
+    margin: 8px 0;
+    border-bottom:1px solid #e2e2e2 ;
+}
+
+.date input{
+    color: #e2e2e2;
+}
+
+.date input::placeholder {
+  color: #8b8b8b;
+}
+
 .time{
     margin: 8px 0;
     border-bottom:1px solid #e2e2e2 ;

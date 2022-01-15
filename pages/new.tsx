@@ -9,8 +9,15 @@ import { graphQLClient } from '../utils/graphql-client';
 import { getAuthCookie } from '../utils/auth-cookies';
 import useSWR from 'swr'; // add
 import styles from '../styles/new.module.css';
+import { DatePicker } from "../components/DatePicker"
+
+
 
 const New = ({token}) => {
+
+  type FormValues = {
+    datetime: string;
+  }
 
   const { data: user } = useSWR('/api/user'); // add 
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,19 +26,26 @@ const New = ({token}) => {
     handleSubmit,
     register,
     formState: { errors },
+    control,
   } = useForm();
 
-  const onSubmit = handleSubmit(async ({ task, time }) => {
+  const {
+  } = useForm()
+
+
+
+  const onSubmit = handleSubmit(async ({ task, date, time  }) => {
     if (errorMessage) setErrorMessage('');
 
     // update
     const mutation = gql`
-      mutation CreateATodo($task: String!, $time: String, $owner: ID!) {
+      mutation CreateATodo($task: String!, $date: String, $time: String, $owner: ID!) {
         createTodo(
-          data: { task: $task, completed: false, time: $time, owner: { connect: $owner } }
+          data: { task: $task, completed: false, date:$date, time: $time, owner: { connect: $owner } }
         ) {
           task
           completed
+          date
           time
           owner {
             _id
@@ -42,6 +56,7 @@ const New = ({token}) => {
 
     const variables = {
       task,
+      date,
       time,
       owner: user && user.id,
     };
@@ -80,6 +95,16 @@ const New = ({token}) => {
           )}
         </div>
 
+
+        <div className={styles.time}>
+          <DatePicker
+            name="datetime"
+            control={control}
+            error={errors.datetime?.message}
+          />
+ 
+        </div>
+ 
 
         <div className={styles.time}>
           <input

@@ -2,7 +2,7 @@ type Todo {
   task: String!
   completed: Boolean!
   owner: User!
-  date: Date
+  date: String
   time: String 
 }
 
@@ -15,4 +15,5 @@ type User {
 type Query {
   allTodos: [Todo!]
   allTodosSortedByTime: [Todo!]! @resolver(name: "sort_by_time", paginated: true)
+  allTodosSortedByDate: [Todo!]! @resolver(name: "sort_by_date", paginated: true)
 }

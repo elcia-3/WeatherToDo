@@ -1,29 +1,23 @@
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
-import React, {useState} from "react";
+import { DatePicker } from "../components/DatePicker"
+import { useForm} from 'react-hook-form'
+
+
+type FormValues = {
+  datetime: string;
+} 
 
 const Calendar = () => {
-/*  const initialDate = new Date()
-  const [startDate, setStartDate] = useState(initialDate)
-  const handleChange = (date) => {
-    setStartDate(date)
-  }
-  */
+  const {
+    control,
+    formState: { errors },
+  } = useForm<FormValues>()
 
   return (
-    <>
-    <input type="date" id="start" name="trip-start"
-       value="2018-07-22"
-       min="2018-01-01" max="2018-12-31"></input>
     <DatePicker
-    dateFormat="yyyy-MM-dd"
-    //customInput={<button>{this.getFormatDate(this.state.day)}</button>} />
+      name="datetime"
+      control={control}
     />
-
-
-
-    </>
-  )    
-};
+  )
+}
 
 export default Calendar;

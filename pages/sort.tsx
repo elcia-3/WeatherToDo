@@ -43,7 +43,7 @@ const Home = ({token}) => {
         timecheck[i] =  true;
       }
       ++i;
-      if(i == data?.allTodosSortedByTime.data.length - 1){
+      if(i == data?.allTodosSortedByTime.data.length){
         break;
       }
     }

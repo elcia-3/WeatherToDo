@@ -29,10 +29,6 @@ const New = ({token}) => {
     control,
   } = useForm();
 
-  const {
-  } = useForm()
-
-
 
   const onSubmit = handleSubmit(async ({ task, date, time  }) => {
     if (errorMessage) setErrorMessage('');
@@ -97,12 +93,10 @@ const New = ({token}) => {
 
 
         <div className={styles.time}>
-          <DatePicker
-            name="datetime"
-            control={control}
-            error={errors.datetime?.message}
+          <input
+            type="date"
+            {...register('date')}
           />
- 
         </div>
  
 

@@ -94,9 +94,15 @@ const Home = ({token}) => {
                     </Link>
                   </div>
 
-                  <div className={styles.timeAndDate}>
-                     <p><span className={styles.date}>{todo.date}</span>{todo.time}</p>
+                  <div className={styles.time}>
+                    {todo.date}
                   </div>
+
+
+                  <div className={styles.time}>
+                    {todo.time}
+                  </div>
+
                 </div>
               </div>
             </>

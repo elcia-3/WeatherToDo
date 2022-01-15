@@ -33,7 +33,6 @@ const Home = ({token}) => {
   );
 
   function  datemanagemant(){
-
     var timecheck: boolean[] = new Array(data?.allTodosSortedByTime.data.length);
     var i: number = 0;
     while(i <= data?.allTodosSortedByTime.data.length - 1 ){

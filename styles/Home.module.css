@@ -7,6 +7,12 @@
   border-bottom:1px solid #4b4b4b;
 }
 
+.datebar{
+  border-top:1px solid #4b4b4b;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
 .todo{
   padding: 8px 0;
   border-top:1px solid #4b4b4b;
@@ -18,8 +24,13 @@
   cursor:pointer;
 }
 
-.time{
-  font-size: 12px;
+.timeAndDate{
+  font-size: 11px;
+  color: #cc851a
+}
+
+.date{
+  margin-right: 6px;
 }
 
 .button a {
